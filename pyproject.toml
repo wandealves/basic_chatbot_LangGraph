@@ -1,0 +1,14 @@
+[project]
+name = "basic-chatbot-langgraph"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "langchain>=0.3.18",
+    "langchain-community>=0.3.17",
+    "langgraph>=0.2.71",
+    "langsmith>=0.3.8",
+    "litellm>=1.61.1",
+    "python-dotenv>=1.0.1",
+]
