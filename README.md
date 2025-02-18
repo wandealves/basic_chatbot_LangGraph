@@ -31,6 +31,10 @@ git clone https://github.com/seu-usuario/basic_chatbot_LangGraph.git
 Instale as dependências:
 
 ```bash
+uv add ipython
+```
+
+```bash
 uv sync
 ```
 

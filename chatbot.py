@@ -20,3 +20,6 @@ class Chatbot:
         self.graph_builder.add_edge(START, "chatbot")
         self.graph_builder.add_edge("chatbot", END)
         self.graph = self.graph_builder.compile()
+    
+    def getGraph(self):
+        return self.graph
