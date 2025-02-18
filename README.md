@@ -57,7 +57,7 @@ uv venv deactivate
 Para iniciar o chatbot, execute o seguinte comando:
 
 ```bash
-uv run python test.py
+uv run python test_chatbot.py
 ```
 
 ## Contribuição
