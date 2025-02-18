@@ -1,5 +1,7 @@
 # basic_chatbot_LangGraph
 
+https://langchain-ai.github.io/langgraph/tutorials/introduction/#part-1-build-a-basic-chatbot
+
 Neste tutorial, construiremos um chatbot de suporte em LangGraph
 
 ## Descrição

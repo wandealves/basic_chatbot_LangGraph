@@ -1,11 +1,10 @@
-import base64
 import os
 from dotenv import load_dotenv
 from state import State
 from langgraph.graph import StateGraph, START, END
 from langchain_community.chat_models import ChatLiteLLM
 
-class Message:
+class Chatbot:
     
     def __init__(self):
         load_dotenv ()
@@ -13,11 +12,11 @@ class Message:
         self.llm = ChatLiteLLM(model="deepseek/deepseek-chat")
         self.graph_builder = StateGraph(State)
 
-    def chatbot(self, state: State):
+    def send(self, state: State):
       return {"messages": [self.llm.invoke(state["messages"])]}
     
     def create_graph(self):
-        self.graph_builder.add_node("chatbot", self.chatbot)
+        self.graph_builder.add_node("chatbot", self.send)
         self.graph_builder.add_edge(START, "chatbot")
         self.graph_builder.add_edge("chatbot", END)
         self.graph = self.graph_builder.compile()

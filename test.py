@@ -1,10 +1,10 @@
-from message import Message
+from chatbot import Chatbot
 
-message = Message()
-message.create_graph()
+chatbot = Chatbot()
+chatbot.create_graph()
 
 def stream_graph_updates(user_input: str):
-    for event in message.graph.stream({"messages": [{"role": "user", "content": user_input}]}):
+    for event in chatbot.graph.stream({"messages": [{"role": "user", "content": user_input}]}):
         for value in event.values():
             print("Assistant:", value["messages"][-1].content)
 
