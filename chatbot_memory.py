@@ -22,9 +22,15 @@ class ChatbotMemory:
         self.memory = MemorySaver()
 
     def send(self, state: State):
+        #user_message = state["messages"][-1].content.lower()
+        
+       # if user_message in ["sair", "fim", "tchau"] or  self.count > 2:
+        #    return END  # Termina o fluxo
+
         llm_with_tools = self.llm.bind_tools(self.tools)
         response = llm_with_tools.invoke(state["messages"])
         return {"messages": [response]}
+
     
     def create_graph(self):
         self.graph_builder.add_node("chatbot", self.send)
@@ -32,11 +38,12 @@ class ChatbotMemory:
         self.graph_builder.add_node("tools", tool_node)
         self.graph_builder.add_conditional_edges(
             "chatbot",
-            tools_condition,
+            self.check_count_condition,
         )
         # Any time a tool is called, we return to the chatbot to decide the next step
         self.graph_builder.add_edge("tools", "chatbot")
         self.graph_builder.add_edge(START, "chatbot")
+ 
         self.graph = self.graph_builder.compile(checkpointer=self.memory)
     
     def stream(self, user_input):
@@ -49,3 +56,16 @@ class ChatbotMemory:
     
     def getGraph(self):
         return self.graph
+    
+    def snapshot(self):
+        return self.graph.get_state(self.config)
+    
+    def check_count_condition(self, state: State):
+        """Retorna END se count > 2, senão continua o fluxo normal."""
+        count = len(state["messages"]) 
+        return END if count > 2 else "tools"
+
+    
+    def should_end(state):
+        last_message = state["messages"][-1]["content"].lower()
+        return "sair" in last_message or "fim" in last_message

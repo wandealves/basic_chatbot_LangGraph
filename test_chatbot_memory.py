@@ -9,6 +9,10 @@ def stream_graph_updates(user_input: str):
 
 while True:
     try:
+        print('############### SNAPSHOT ###############')
+        snapshot = chatbot.snapshot()
+        print(snapshot)
+        print('############### SNAPSHOT FIM ###############')
         user_input = input("User: ")
         if user_input.lower() in ["quit", "exit", "q"]:
             print("Goodbye!")
