@@ -32,6 +32,7 @@ Instale as dependências:
 
 ```bash
 uv add ipython
+uv add tavily-python
 ```
 
 ```bash
